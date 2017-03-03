@@ -14,11 +14,12 @@ import {WidgetsComponent} from "./component/blog_widgets.component";
 import {SearchComponent} from "./component/blog_search.component";
 import {BlogCategoryComponent} from "./component/blog_category.component";
 import {OtherWidgetComponent} from "./component/blog_other_widget.component";
-import {AboutComponent} from "./about/about.component";
+import {BlogPostComponent} from "./blog_post/blog_post.component";
 import {TinymceModule} from "../angular2-tinymce.module";
+import {AdminHomeComponent} from "./admin/admin_home.component";
 
 @NgModule({
-  imports: [BrowserModule, routing, FormsModule, HttpModule, 	BrowserModule,
+  imports: [BrowserModule, routing, FormsModule, HttpModule, BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     TinymceModule.withConfig({
@@ -26,7 +27,8 @@ import {TinymceModule} from "../angular2-tinymce.module";
     })
   ],
   declarations: [AppComponent, BlogListComponent, FooterComponent, MenuComponent,
-    SearchComponent, BlogCategoryComponent, OtherWidgetComponent, WidgetsComponent, BlogDetailComponent,AboutComponent],
+    SearchComponent, BlogCategoryComponent, OtherWidgetComponent,
+    WidgetsComponent, BlogDetailComponent, BlogPostComponent, AdminHomeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

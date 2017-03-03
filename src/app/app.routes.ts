@@ -2,7 +2,8 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {BlogListComponent} from "./component/blog_list.component";
 import {BlogDetailComponent} from "./component/blog_details.component";
-import {AboutComponent} from "./about/about.component";
+import {BlogPostComponent} from "./blog_post/blog_post.component";
+import {AdminHomeComponent} from "./admin/admin_home.component";
 
 // Route config let's you map routes to components
 const routes: Routes = [
@@ -13,8 +14,12 @@ const routes: Routes = [
   },
 
   {
-    path: 'about',
-    component: AboutComponent,
+    path: 'blogpost',
+    component: BlogPostComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminHomeComponent,
   },
   // // map '/persons/:id' to person details component
   {
