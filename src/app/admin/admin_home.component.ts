@@ -1,10 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Response } from '@angular/http';
+///<reference path="../../../node_modules/@angular/http/src/interfaces.d.ts"/>
+import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Response} from '@angular/http';
 
 import {Blog} from '../model/blog';
 import {BlogService} from '../service/blog.service';
-import {Headers, Http} from "@angular/http";
+import { RequestOptions,
+  RequestMethod,
+  RequestOptionsArgs,
+  Http,
+  Headers} from "@angular/http";
 
 @Component({
   selector: 'my-admin',
@@ -13,7 +18,8 @@ import {Headers, Http} from "@angular/http";
     './morris.css',
     './font-awesome/css/font-awesome.min.css'
   ],
-  templateUrl: './admin_home.component.html'
+  templateUrl: './admin_home.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 
 
@@ -28,11 +34,11 @@ export class AdminHomeComponent implements OnInit {
   constructor(private blogService: BlogService,
               private route: ActivatedRoute,
               private router: Router,
-              private http : Http){
+              private http: Http) {
   }
 
   ngOnInit(): void {
-    alert('oninit');
+    //alert('oninit');
     // this.route.params.subscribe(params => {
     //   this.blogService
     //     .get(params['id'])
@@ -42,12 +48,18 @@ export class AdminHomeComponent implements OnInit {
     //       () => this.isLoading = false);
     // });
   }
-  savePersonDetails(){
+
+  savePersonDetails() {
     console.debug("savePersonDetails");
+    this.blog.content = 'content1';
+    this.blog.title = 'title1';
+    let str = JSON.stringify(this.blog);
     this.blogService
       .save(this.blog)
       .subscribe(
-        (r: Response) => {console.log('success');}
+        (r: Response) => {
+          console.log('success');
+        }
       );
   }
 
@@ -55,14 +67,46 @@ export class AdminHomeComponent implements OnInit {
     console.debug("save123");
     this.blog.content = 'content1';
     this.blog.title = 'title1';
-    this.http
-      .post(`http://localhost:8080/blog/`, JSON.stringify(this.blog), {headers: this.getHeaders()});
+    let str = JSON.stringify(this.blog);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+
+    // url?: string;
+    // method?: string | RequestMethod;
+    // search?: string | URLSearchParams;
+    // headers?: Headers;
+    // body?: any;
+    // withCredentials?: boolean;
+    // responseType?: ResponseContentType;
+
+    let requestOptions = {
+      headers: headers,
+    };
+
+    this.blogService
+      .save(this.blog)
+      .subscribe(
+        data => console.log(data),
+        err => console.log(err.json().message),
+        () => console.log('Post Complete')
+      );
+
+    // this.http
+    //   .post(`http://localhost:8080/blog/`, str, requestOptions)
+    //   .subscribe(
+    //     data => console.log(data),
+    //     err => console.log(err.json().message),
+    //     () => console.log('Post Complete')
+    //   );
     return "ok;"
   }
 
-  private getHeaders(){
+  private getHeaders(): Headers {
     let headers = new Headers();
     headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
     return headers;
   }
 }
+
