@@ -2,21 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'blog_search',
-  template:
-  `
-<div class="well">
-  <h4>Blog Search</h4>
-  <div class="input-group">
-    <input type="text" class="form-control">
-    <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-  </div>
-</div>
-
-`
+  templateUrl : 'blog_search.component.html',
 })
 export class SearchComponent implements OnInit {
   constructor() {

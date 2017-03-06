@@ -1,13 +1,13 @@
 export class PaginationPage<T> {
 
-  content: Array<T>;
+  content: T[];
   last: boolean;
   first: boolean;
   number: number;
   size: number;
   numberOfElements: number;
   totalElements: number;
-  sort: Array<PaginationPropertySort>;
+  sort: PaginationPropertySort[];
 }
 
 export class PaginationPropertySort {

@@ -48,10 +48,9 @@ export class BlogService{
   }
 
   save(Blog: Blog) : Observable<Response>{
-    // this won't actually work because the StarWars API doesn't
-    // is read-only. But it would look like this:
+    let a = 1;
     return this.http
-      .put(`${this.baseUrl}/blog/${Blog.id}`, JSON.stringify(Blog), {headers: this.getHeaders()});
+      .post(`http://localhost:8080/blog/`, JSON.stringify(Blog), {headers: this.getHeaders()});
   }
 
   private getHeaders(){

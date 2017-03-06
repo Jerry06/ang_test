@@ -4,9 +4,7 @@ import {FormControl} from '@angular/forms';
 @Component({
   selector: 'about',
   template: `
-<div style="height: 500px">
-<app-tinymce [(ngModel)]='content'></app-tinymce>
-</div>
+  <app-tinymce [(ngModel)]='content'></app-tinymce>
 
 `,
   encapsulation: ViewEncapsulation.None

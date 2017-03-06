@@ -29,11 +29,11 @@
         <li *ngIf="page?.first == false" class="previous">
           <!--<a routerLink="/blog"  href="blog?page={{page?.number - 1}}&size={{page?.size}}">&larr; Newer</a>-->
           <!--<a [routerLink]="['blog']" [queryParams]="{ page: page?.number-1, size: page?.size  }">Go to Page 99</a>-->
-          <a [routerLink]="['']" [queryParams]="{ page: page?.number-1, size: page?.size  }">&larr; Newer</a>
+          <a [routerLink]="['/blog']" [queryParams]="{ page: page?.number-1, size: page?.size  }">&larr; Newer</a>
         </li>
         <li class="next">
           <!--<a href="blog?page={{page?.number + 1}}&size={{page?.size}}">Older &rarr;</a>-->
-          <a [routerLink]="['']" [queryParams]="{ page: page?.number+1, size: page?.size  }">Older &rarr;</a>
+          <a [routerLink]="['/blog']" [queryParams]="{ page: page?.number+1, size: page?.size  }">Older &rarr;</a>
         </li>
       </ul>
 
