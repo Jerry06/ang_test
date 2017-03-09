@@ -251,10 +251,11 @@
                 <form role="form">
                   <div class="form-group">
                     <label>Title</label>
-                    <input [(ngModel)]='title' name="title" ngDefaultControl  class="form-control">
+                    <input [(ngModel)]='blog.title' name="title" ngDefaultControl  class="form-control">
                   </div>
                   <div class="form-group">
-                    <about [(ngModel)]='content' name="content" ngDefaultControl ></about>
+                    <app-tinymce [(ngModel)]='blog.content' name="content" ></app-tinymce>
+                    <pre>{{content}}</pre>
                   </div>
                   <div class="form-group">
                     <label>Category</label>

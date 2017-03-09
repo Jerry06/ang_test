@@ -1,5 +1,5 @@
 ///<reference path="../../../node_modules/@angular/http/src/interfaces.d.ts"/>
-import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewEncapsulation, Input} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Response} from '@angular/http';
 
@@ -10,6 +10,7 @@ import { RequestOptions,
   RequestOptionsArgs,
   Http,
   Headers} from "@angular/http";
+import {BlogPostComponent} from "../blog_post/blog_post.component";
 
 @Component({
   selector: 'my-admin',
@@ -27,7 +28,7 @@ export class AdminHomeComponent implements OnInit {
 
   blog: Blog = new Blog();
   title: string;
-  content: string;
+  @Input() content: string = '^_^';
   errorMessage: String;
   isLoading: boolean = true;
 
@@ -38,52 +39,10 @@ export class AdminHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //alert('oninit');
-    // this.route.params.subscribe(params => {
-    //   this.blogService
-    //     .get(params['id'])
-    //     .subscribe(
-    //       p => this.blog = p,
-    //       e => this.errorMessage = e,
-    //       () => this.isLoading = false);
-    // });
-  }
 
-  savePersonDetails() {
-    console.debug("savePersonDetails");
-    this.blog.content = 'content1';
-    this.blog.title = 'title1';
-    let str = JSON.stringify(this.blog);
-    this.blogService
-      .save(this.blog)
-      .subscribe(
-        (r: Response) => {
-          console.log('success');
-        }
-      );
   }
 
   save123() {
-    console.debug("save123");
-    this.blog.content = 'content1';
-    this.blog.title = 'title1';
-    let str = JSON.stringify(this.blog);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-
-    // url?: string;
-    // method?: string | RequestMethod;
-    // search?: string | URLSearchParams;
-    // headers?: Headers;
-    // body?: any;
-    // withCredentials?: boolean;
-    // responseType?: ResponseContentType;
-
-    let requestOptions = {
-      headers: headers,
-    };
-
     this.blogService
       .save(this.blog)
       .subscribe(
@@ -91,15 +50,6 @@ export class AdminHomeComponent implements OnInit {
         err => console.log(err.json().message),
         () => console.log('Post Complete')
       );
-
-    // this.http
-    //   .post(`http://localhost:8080/blog/`, str, requestOptions)
-    //   .subscribe(
-    //     data => console.log(data),
-    //     err => console.log(err.json().message),
-    //     () => console.log('Post Complete')
-    //   );
-    return "ok;"
   }
 
   private getHeaders(): Headers {
