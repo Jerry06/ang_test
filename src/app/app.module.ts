@@ -17,6 +17,7 @@ import { OtherWidgetComponent } from './component/blog_other_widget.component';
 import { BlogPostComponent } from './blog_post/blog_post.component';
 import { TinymceModule } from '../angular2-tinymce.module';
 import { AdminHomeComponent } from './admin/admin_home.component';
+import { AdGridComponent } from './admin/admin_grid.component';
 
 @NgModule({
   imports: [BrowserModule, routing, FormsModule, HttpModule, BrowserModule,
@@ -28,7 +29,7 @@ import { AdminHomeComponent } from './admin/admin_home.component';
   ],
   declarations: [AppComponent, BlogListComponent, FooterComponent, MenuComponent,
     SearchComponent, BlogCategoryComponent, OtherWidgetComponent,
-    WidgetsComponent, BlogDetailComponent, BlogPostComponent, AdminHomeComponent],
+    WidgetsComponent, BlogDetailComponent, BlogPostComponent, AdminHomeComponent, AdGridComponent],
   bootstrap: [AppComponent]
  })
 export class AppModule {
