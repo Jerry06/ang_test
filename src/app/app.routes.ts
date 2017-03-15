@@ -5,6 +5,7 @@ import {BlogDetailComponent} from "./component/blog_details.component";
 import {BlogPostComponent} from "./blog_post/blog_post.component";
 import {AdminHomeComponent} from "./admin/admin_home.component";
 import {AdGridComponent} from "./admin/admin_grid.component";
+import {AdMenuComponent} from "./admin/admin_menu.component";
 
 // Route config let's you map routes to components
 const routes: Routes = [
@@ -23,8 +24,16 @@ const routes: Routes = [
     component: AdminHomeComponent,
   },
   {
+    path: 'admin/:id',
+    component: AdminHomeComponent,
+  },
+  {
     path: 'grid',
     component: AdGridComponent,
+  },
+  {
+    path: 'menu',
+    component: AdMenuComponent,
   },
   // // map '/persons/:id' to person details component
   {

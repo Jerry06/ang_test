@@ -5,11 +5,13 @@ import {Response} from '@angular/http';
 
 import {Blog} from '../model/blog';
 import {BlogService} from '../service/blog.service';
-import { RequestOptions,
+import {
+  RequestOptions,
   RequestMethod,
   RequestOptionsArgs,
   Http,
-  Headers} from "@angular/http";
+  Headers
+} from "@angular/http";
 import {BlogPostComponent} from "../blog_post/blog_post.component";
 
 @Component({
@@ -27,8 +29,8 @@ import {BlogPostComponent} from "../blog_post/blog_post.component";
 export class AdminHomeComponent implements OnInit {
 
   blog: Blog = new Blog();
-  title: string;
-  @Input() content: string = '^_^';
+  // title: string;
+  //@Input() content: string = '^_^';
   errorMessage: String;
   isLoading: boolean = true;
 
@@ -39,10 +41,21 @@ export class AdminHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.route.params.subscribe(params => {
+      this.blogService
+        .get(params['id'])
+        .subscribe(
+          p => {
+            this.blog = p;
+            //this.content = this.blog.content;
+          },
+          e => this.errorMessage = e,
+          () => this.isLoading = false);
+    });
   }
 
   save123() {
+    // this.blog.content = this.content;
     this.blogService
       .save(this.blog)
       .subscribe(
@@ -50,13 +63,6 @@ export class AdminHomeComponent implements OnInit {
         err => console.log(err.json().message),
         () => console.log('Post Complete')
       );
-  }
-
-  private getHeaders(): Headers {
-    let headers = new Headers();
-    headers.append('Accept', 'application/json');
-    headers.append('Content-Type', 'application/json');
-    return headers;
   }
 }
 
