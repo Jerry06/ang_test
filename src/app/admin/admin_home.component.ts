@@ -3,7 +3,7 @@ import {Component, OnInit, OnDestroy, ViewEncapsulation, Input} from '@angular/c
 import {ActivatedRoute, Router} from '@angular/router';
 import {Response} from '@angular/http';
 
-import {Blog} from '../model/blog';
+import {Blog, Category, Tag} from '../model/blog';
 import {BlogService} from '../service/blog.service';
 import {
   RequestOptions,
@@ -27,8 +27,12 @@ import {BlogPostComponent} from "../blog_post/blog_post.component";
 
 
 export class AdminHomeComponent implements OnInit {
+  cats: Category[];
+  tags: Tag[];
+  selectedValue: string;
+  blog: Blog = {
 
-  blog: Blog = new Blog();
+  };
   // title: string;
   //@Input() content: string = '^_^';
   errorMessage: String;
@@ -41,6 +45,17 @@ export class AdminHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectedValue = 'Java';
+    this.blogService.getCats().subscribe(
+      p => this.cats = p,
+      e => this.errorMessage = e,
+      () => this.isLoading = false);
+
+    this.blogService.getTags().subscribe(
+      p => this.tags = p,
+      e => this.errorMessage = e,
+      () => this.isLoading = false);
+
     this.route.params.subscribe(params => {
       this.blogService
         .get(params['id'])

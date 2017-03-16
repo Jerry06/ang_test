@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http, Response, Headers, URLSearchParams, RequestOptions} from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import { Blog } from '../model/blog';
+import {Observable} from 'rxjs/Rx';
+import {Blog, Tag, Category} from '../model/blog';
 import {PaginationPage, PaginationPropertySort} from "../model/pagination";
 
 @Injectable()
-export class BlogService{
+export class BlogService {
   private baseUrl: string = 'http://localhost:8080';
 
-  constructor(private http : Http){
+  constructor(private http: Http) {
   }
 
-  getPage(page: number, pageSize: number, sort: PaginationPropertySort): Observable<PaginationPage<Blog>>{
+  getPage(page: number, pageSize: number, sort: PaginationPropertySort): Observable<PaginationPage<Blog>> {
     let params = new URLSearchParams();
     params.set('size', `${pageSize}`);
     params.set('page', `${page}`);
@@ -32,28 +32,57 @@ export class BlogService{
     return people$;
   }
 
-  getAll(): Observable<PaginationPage<Blog>>{
+  getAll(): Observable<PaginationPage<Blog>> {
     let people$ = this.http
       .get(`${this.baseUrl}/blog`, {headers: this.getHeaders()})
       .map(mapBlogs)
       .catch(handleError);
-      return people$;
+    return people$;
+  }
+
+  getTags(): Observable<Tag[]> {
+    let result$ = this.http
+      .get(`${this.baseUrl}/blog/tags`, {headers: this.getHeaders()})
+      .map(response => {
+        return response.json().map(r => {
+          let tag = <Tag>({
+            name: r.name,
+          });
+          return tag;
+        });
+      })
+      .catch(handleError);
+    return result$;
+  }
+
+  getCats(): Observable<Category[]> {
+    let result$ = this.http
+      .get(`${this.baseUrl}/blog/cats`, {headers: this.getHeaders()})
+      .map(response => {
+        return response.json().map(r => {
+          return <Category>({
+            name: r.name,
+          });
+        });
+      })
+      .catch(handleError);
+    return result$;
   }
 
   get(id: string): Observable<Blog> {
     let Blog$ = this.http
       .get(`${this.baseUrl}/blog/${id}`, {headers: this.getHeaders()})
       .map(mapBlog);
-      return Blog$;
+    return Blog$;
   }
 
-  save(Blog: Blog) : Observable<Response>{
+  save(Blog: Blog): Observable<Response> {
     let a = 1;
     return this.http
       .post(`http://localhost:8080/blog/`, JSON.stringify(Blog), {headers: this.getHeaders()});
   }
 
-  private getHeaders(){
+  private getHeaders() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
@@ -61,35 +90,35 @@ export class BlogService{
   }
 }
 
-function mapBlogs(response:Response): PaginationPage<Blog>{
-   // uncomment to simulate error:
-   // throw new Error('ups! Force choke!');
+function mapBlogs(response: Response): PaginationPage<Blog> {
+  // uncomment to simulate error:
+  // throw new Error('ups! Force choke!');
 
-   // The response of the API has a results
-   // property with the actual results
+  // The response of the API has a results
+  // property with the actual results
 
   let json = response.json();
-  let result : PaginationPage<Blog> = Object.assign( new PaginationPage<Blog>(), json );
+  let result: PaginationPage<Blog> = Object.assign(new PaginationPage<Blog>(), json);
 
-   return result;
+  return result;
 }
 
 
 // to avoid breaking the rest of our app
 // I extract the id from the Blog url
-function extractId(BlogData:any){
-  let extractedId = BlogData.url.replace('http://localhost:8080/blog/','').replace('/','');
+function extractId(BlogData: any) {
+  let extractedId = BlogData.url.replace('http://localhost:8080/blog/', '').replace('/', '');
   return parseInt(extractedId);
 }
 
-function mapBlog(response:Response): Blog{
+function mapBlog(response: Response): Blog {
   // toBlog looks just like in the previous example
-  let result : Blog = Object.assign( new Blog(), response.json() );
+  let result: Blog = Object.assign(new Blog(), response.json());
   return result;
 }
 
 // this could also be a private method of the component class
-function handleError (error: any) {
+function handleError(error: any) {
   // log error
   // could be something more sofisticated
   let errorMsg = error.message || `Yikes! There was was a problem with our hyperdrive device and we couldn't retrieve your data!`
