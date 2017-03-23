@@ -107,7 +107,7 @@ export class AdminHomeComponent implements OnInit {
         .subscribe(
           p => {
             this.blog = p;
-            this.seletedTags = ['lamda'];
+            this.seletedTags = p.tags.map((t) => t.name);
             //this.content = this.blog.content;
           },
           e => this.errorMessage = e,
