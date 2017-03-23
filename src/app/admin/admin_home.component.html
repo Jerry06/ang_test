@@ -26,12 +26,21 @@
                   <!--</select>-->
                   <!--</div>-->
 
-                  <div class="form-group">
-                    <label>Cats</label>
-                    <select [(ngModel)]='blog.category.name' name='name'>
-                      <option *ngFor="let cat of cats" [ngValue]='cat.name'>{{cat.name}}</option>
-                    </select>
-                  </div>
+                  <!--<div class="form-group">-->
+                  <!--<label>Tags</label>-->
+                  <!--<select [(ngModel)]='selectedValue' name='name'>-->
+                  <!--<option *ngFor="let tag of tags" [ngValue]='tag.name'>{{tag.name}}</option>-->
+                  <!--</select>-->
+                  <!--</div>-->
+
+                  <ng-select [multiple]="true"
+                             [items]="items"
+                             [active]="seletedTags"
+                             [disabled]="disabled"
+                             (data)="refreshValue($event)"
+                             (selected)="selected($event)"
+                             (removed)="removed($event)"
+                             placeholder="No city selected" ngDefaultControl></ng-select>
 
                   <button (click)="save123()" class="btn btn-default">Save</button>
                 </form>

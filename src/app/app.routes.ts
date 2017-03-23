@@ -6,6 +6,7 @@ import {BlogPostComponent} from "./blog_post/blog_post.component";
 import {AdminHomeComponent} from "./admin/admin_home.component";
 import {AdGridComponent} from "./admin/admin_grid.component";
 import {AdMenuComponent} from "./admin/admin_menu.component";
+import {MultipleDemoComponent} from "./blog_post/multiple-demo";
 
 // Route config let's you map routes to components
 const routes: Routes = [
@@ -14,7 +15,10 @@ const routes: Routes = [
     path: 'blog',
     component: BlogListComponent,
   },
-
+  {
+    path: 'test',
+    component: MultipleDemoComponent,
+  },
   {
     path: 'blogpost',
     component: BlogPostComponent,

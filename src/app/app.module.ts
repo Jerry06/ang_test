@@ -5,6 +5,7 @@ import {HttpModule} from '@angular/http';
 
 import {routing} from './app.routes';
 
+import { SelectModule } from 'ng2-select';
 import {AppComponent}  from './app.component';
 import {BlogListComponent} from './component/blog_list.component';
 import {BlogDetailComponent} from './component/blog_details.component';
@@ -15,6 +16,7 @@ import {SearchComponent} from './component/blog_search.component';
 import {BlogCategoryComponent} from './component/blog_category.component';
 import {OtherWidgetComponent} from './component/blog_other_widget.component';
 import {BlogPostComponent} from './blog_post/blog_post.component';
+import {MultipleDemoComponent} from './blog_post/multiple-demo';
 import {TinymceModule} from '../angular2-tinymce.module';
 import {AdminHomeComponent} from './admin/admin_home.component';
 import {AdGridComponent} from './admin/admin_grid.component';
@@ -23,6 +25,7 @@ import {AdMenuComponent} from './admin/admin_menu.component';
 @NgModule({
   imports: [BrowserModule, routing, FormsModule, HttpModule, BrowserModule,
     FormsModule,
+    SelectModule,
     ReactiveFormsModule,
     TinymceModule.withConfig({
       plugins: ['lists', 'code']
@@ -31,7 +34,7 @@ import {AdMenuComponent} from './admin/admin_menu.component';
   declarations: [AppComponent, BlogListComponent, FooterComponent, MenuComponent,
     SearchComponent, BlogCategoryComponent, OtherWidgetComponent,
     WidgetsComponent, BlogDetailComponent, BlogPostComponent, AdminHomeComponent, AdGridComponent
-    , AdMenuComponent],
+    , AdMenuComponent, MultipleDemoComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

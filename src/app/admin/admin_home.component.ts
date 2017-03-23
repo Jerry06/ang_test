@@ -13,6 +13,7 @@ import {
   Headers
 } from "@angular/http";
 import {BlogPostComponent} from "../blog_post/blog_post.component";
+import {SelectModule} from 'ng2-select';
 
 @Component({
   selector: 'my-admin',
@@ -29,7 +30,8 @@ import {BlogPostComponent} from "../blog_post/blog_post.component";
 export class AdminHomeComponent implements OnInit {
   cats: Category[];
   tags: Tag[];
-  selectedValue: string;
+  seletedTags: String[];
+  selectedValue: string = 'lamda';
   blog: Blog = {
 
   };
@@ -37,6 +39,49 @@ export class AdminHomeComponent implements OnInit {
   //@Input() content: string = '^_^';
   errorMessage: String;
   isLoading: boolean = true;
+  public items:String[] = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
+    'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
+    'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin', 'Düsseldorf',
+    'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg', 'Hamburg', 'Hannover',
+    'Helsinki', 'Leeds', 'Leipzig', 'Lisbon', 'Łódź', 'London', 'Kraków', 'Madrid',
+    'Málaga', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Naples', 'Palermo',
+    'Paris', 'Poznań', 'Prague', 'Riga', 'Rome', 'Rotterdam', 'Seville', 'Sheffield',
+    'Sofia', 'Stockholm', 'Stuttgart', 'The Hague', 'Turin', 'Valencia', 'Vienna',
+    'Vilnius', 'Warsaw', 'Wrocław', 'Zagreb', 'Zaragoza'];
+
+  // public items:Array<any> = [{id: 54, text: 'Vienna'}, {id: 54, text: 'A'}, {id: 54, text: 'B'}];
+
+  private value:any = ['Athens'];
+  private _disabledV:string = '0';
+  private disabled:boolean = false;
+
+  private get disabledV():string {
+    return this._disabledV;
+  }
+
+  private set disabledV(value:string) {
+    this._disabledV = value;
+    this.disabled = this._disabledV === '1';
+  }
+
+  public selected(value:any):void {
+    console.log('Selected value is: ', value);
+  }
+
+  public removed(value:any):void {
+    console.log('Removed value is: ', value);
+  }
+
+  public refreshValue(value:any):void {
+    this.value = value;
+  }
+
+  public itemsToString(value:Array<any> = []):string {
+    return value
+      .map((item:any) => {
+        return item.text;
+      }).join(',');
+  }
 
   constructor(private blogService: BlogService,
               private route: ActivatedRoute,
@@ -45,14 +90,14 @@ export class AdminHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedValue = 'Java';
+    // this.selectedValue = 'Java';
     this.blogService.getCats().subscribe(
       p => this.cats = p,
       e => this.errorMessage = e,
       () => this.isLoading = false);
 
-    this.blogService.getTags().subscribe(
-      p => this.tags = p,
+    this.blogService.getTagsStr().subscribe(
+      p => this.items = p,
       e => this.errorMessage = e,
       () => this.isLoading = false);
 
@@ -62,6 +107,7 @@ export class AdminHomeComponent implements OnInit {
         .subscribe(
           p => {
             this.blog = p;
+            this.seletedTags = ['lamda'];
             //this.content = this.blog.content;
           },
           e => this.errorMessage = e,

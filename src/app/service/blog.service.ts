@@ -55,6 +55,18 @@ export class BlogService {
     return result$;
   }
 
+  getTagsStr(): Observable<String[]> {
+    let result$ = this.http
+      .get(`${this.baseUrl}/blog/tags`, {headers: this.getHeaders()})
+      .map(response => {
+        return response.json().map(r => {
+          return r.name;
+        });
+      })
+      .catch(handleError);
+    return result$;
+  }
+
   getCats(): Observable<Category[]> {
     let result$ = this.http
       .get(`${this.baseUrl}/blog/cats`, {headers: this.getHeaders()})
@@ -113,7 +125,7 @@ function extractId(BlogData: any) {
 
 function mapBlog(response: Response): Blog {
   // toBlog looks just like in the previous example
-  let result: Blog = Object.assign(new Blog(), response.json());
+  let result: Blog = Object.assign({}, response.json());
   return result;
 }
 
