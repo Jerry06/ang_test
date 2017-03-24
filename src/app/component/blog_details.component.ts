@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {Blog} from '../model/blog';
 import {BlogService} from '../service/blog.service';
 import {ActivatedRoute, Router, NavigationEnd} from "@angular/router";
@@ -91,7 +91,10 @@ import {Subscription} from 'rxjs/Rx'
 </div>
 
 
-`
+`,
+
+  encapsulation: ViewEncapsulation.None,
+
 })
 export class BlogDetailComponent implements OnInit {
   blog: Blog;

@@ -28,7 +28,8 @@ import {AdMenuComponent} from './admin/admin_menu.component';
     SelectModule,
     ReactiveFormsModule,
     TinymceModule.withConfig({
-      plugins: ['lists', 'code']
+      plugins: ['lists', 'code', 'codesample'],
+      toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | codesample'
     })
   ],
   declarations: [AppComponent, BlogListComponent, FooterComponent, MenuComponent,

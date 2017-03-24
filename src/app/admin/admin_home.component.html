@@ -1,4 +1,4 @@
-<div id="wrapper">
+<div id="wrapper" xmlns="http://www.w3.org/1999/html">
 
   <ad-menu></ad-menu>
 
@@ -17,6 +17,7 @@
                   </div>
                   <div class="form-group">
                     <app-tinymce [(ngModel)]='blog.content' name="blog.content"></app-tinymce>
+                    <pre>&lt;pre class="brush: java;"&gt;&lt;/pre&gt;</pre>
                     <pre>{{blog.content}}</pre>
                   </div>
                   <!--<div class="form-group">-->
