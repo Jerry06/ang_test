@@ -44,6 +44,10 @@ const routes: Routes = [
     path: 'blog/:id',
     component: BlogDetailComponent
   },
+  {
+    path: 'abc',
+    component: BlogDetailComponent
+  },
   // map '/' to '/persons' as our default route
   {
     path: '',

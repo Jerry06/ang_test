@@ -21,21 +21,27 @@ import {TinymceModule} from '../angular2-tinymce.module';
 import {AdminHomeComponent} from './admin/admin_home.component';
 import {AdGridComponent} from './admin/admin_grid.component';
 import {AdMenuComponent} from './admin/admin_menu.component';
+import {HighlightDirective} from "./highlight.directive";
+import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';
 
 @NgModule({
   imports: [BrowserModule, routing, FormsModule, HttpModule, BrowserModule,
     FormsModule,
     SelectModule,
     ReactiveFormsModule,
+    HighlightJsModule,
     TinymceModule.withConfig({
       plugins: ['lists', 'code', 'codesample'],
       toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | codesample'
     })
   ],
+  providers: [
+    HighlightJsService
+  ],
   declarations: [AppComponent, BlogListComponent, FooterComponent, MenuComponent,
     SearchComponent, BlogCategoryComponent, OtherWidgetComponent,
     WidgetsComponent, BlogDetailComponent, BlogPostComponent, AdminHomeComponent, AdGridComponent
-    , AdMenuComponent, MultipleDemoComponent],
+    , AdMenuComponent, MultipleDemoComponent,  HighlightDirective],
   bootstrap: [AppComponent]
 })
 export class AppModule {

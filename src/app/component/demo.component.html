@@ -1,0 +1,26 @@
+
+    <h4>Raw pre code without highlighting</h4>
+    <pre>
+            <code>
+                class Greeter {{ '{' }}
+                    constructor(public greeting: string) {{ '{' }} {{ '}' }}
+
+                    greet() {{ '{' }}
+                        return "hello world";
+                    {{ '}' }}
+                {{ '}' }};
+            </code>
+        </pre>
+    <h4>Same again highlighted using HighlightJsService.highlight(element)</h4>
+    <pre>
+            <code #snippet class="typescript highlight-this">
+                class Greeter {{ '{' }}
+                    constructor(public greeting: string) {{ '{' }} {{ '}' }}
+
+                    greet() {{ '{' }}
+                        return "hello world";
+                    {{ '}' }}
+                {{ '}' }};
+            </code>
+        </pre>
+

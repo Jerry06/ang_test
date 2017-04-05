@@ -22,6 +22,10 @@
         <a class="btn btn-primary" [routerLink]="['/blog', blog.id]">Read More <span
           class="glyphicon glyphicon-chevron-right"></span></a>
 
+        <nav>
+          <a routerLink="/abc" routerLinkActive="active">Crisis Center</a>
+        </nav>
+
         <hr>
       </div>
       <!-- Pager -->
@@ -29,7 +33,7 @@
         <li *ngIf="page?.first == false" class="previous">
           <!--<a routerLink="/blog"  href="blog?page={{page?.number - 1}}&size={{page?.size}}">&larr; Newer</a>-->
           <!--<a [routerLink]="['blog']" [queryParams]="{ page: page?.number-1, size: page?.size  }">Go to Page 99</a>-->
-          <a [routerLink]="['/blog']" [queryParams]="{ page: page?.number-1, size: page?.size  }">&larr; Newer</a>
+          <a routerLink="['/blog']" [queryParams]="{ page: page?.number-1, size: page?.size  }">&larr; Newer</a>
         </li>
         <li class="next">
           <!--<a href="blog?page={{page?.number + 1}}&size={{page?.size}}">Older &rarr;</a>-->
