@@ -29,56 +29,46 @@ import {SelectModule} from 'ng2-select';
 
 export class AdminHomeComponent implements OnInit {
   cats: Category[];
-  tags: Tag[];
-  seletedTags: String[];
-  selectedValue: string = 'lamda';
-  blog: Blog = {
-
-  };
+  tags: Tag[]= [{name : 'a'}];
+  selectedTags: String[] = ['java'];
+  blog: Blog = {};
   // title: string;
   //@Input() content: string = '^_^';
   errorMessage: String;
   isLoading: boolean = true;
-  public items:String[] = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
-    'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
-    'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin', 'Düsseldorf',
-    'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg', 'Hamburg', 'Hannover',
-    'Helsinki', 'Leeds', 'Leipzig', 'Lisbon', 'Łódź', 'London', 'Kraków', 'Madrid',
-    'Málaga', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Naples', 'Palermo',
-    'Paris', 'Poznań', 'Prague', 'Riga', 'Rome', 'Rotterdam', 'Seville', 'Sheffield',
-    'Sofia', 'Stockholm', 'Stuttgart', 'The Hague', 'Turin', 'Valencia', 'Vienna',
-    'Vilnius', 'Warsaw', 'Wrocław', 'Zagreb', 'Zaragoza'];
+  public items: String[] = ['Java'];
 
   // public items:Array<any> = [{id: 54, text: 'Vienna'}, {id: 54, text: 'A'}, {id: 54, text: 'B'}];
 
-  private value:any = ['Athens'];
-  private _disabledV:string = '0';
-  private disabled:boolean = false;
+  private value: any = ['Athens'];
+  private _disabledV: string = '0';
+  private disabled: boolean = false;
 
-  private get disabledV():string {
+  private get disabledV(): string {
     return this._disabledV;
   }
 
-  private set disabledV(value:string) {
+  private set disabledV(value: string) {
     this._disabledV = value;
     this.disabled = this._disabledV === '1';
   }
 
-  public selected(value:any):void {
+  public selected(value: any): void {
+    this.blog.tags.push(value);
     console.log('Selected value is: ', value);
   }
 
-  public removed(value:any):void {
+  public removed(value: any): void {
     console.log('Removed value is: ', value);
   }
 
-  public refreshValue(value:any):void {
+  public refreshValue(value: any): void {
     this.value = value;
   }
 
-  public itemsToString(value:Array<any> = []):string {
+  public itemsToString(value: Array<any> = []): string {
     return value
-      .map((item:any) => {
+      .map((item: any) => {
         return item.text;
       }).join(',');
   }
@@ -107,7 +97,7 @@ export class AdminHomeComponent implements OnInit {
         .subscribe(
           p => {
             this.blog = p;
-            this.seletedTags = p.tags.map((t) => t.name);
+            this.selectedTags = p.tags.map((t) => t.name);
             //this.content = this.blog.content;
           },
           e => this.errorMessage = e,
@@ -116,13 +106,13 @@ export class AdminHomeComponent implements OnInit {
   }
 
   save123() {
-    // this.blog.content = this.content;
+    this.blog.tags = this.selectedTags.map((t) => <Tag>({ name: t }));
     this.blogService
       .save(this.blog)
       .subscribe(
         data => console.log(data),
         err => console.log(err.json().message),
-        () => console.log('Post Complete')
+        () => console.log('Post Complete1')
       );
   }
 }

@@ -10,66 +10,14 @@ import {HighlightJsService} from "angular2-highlight-js";
 
 @Component({
   selector: 'blog-details',
-  // templateUrl: 'demo.component.html',
-  template: `
-<div class="container">
-  <div class="row">
-
-        
-         
-    <div *ngIf="!blog" class="col-lg-8">Not Found !! Try other blog post !</div>          
-    <div *ngIf="blog" class="col-lg-8">
-
-            
-      <h1>{{blog.title}}</h1>
-   <pre>
-            <code class="java">
-                class Greeter {{ '{' }}
-                    constructor(public greeting: string) {{ '{' }} {{ '}' }}
-
-                    greet() {{ '{' }}
-                        return "hello world";
-                    {{ '}' }}
-                {{ '}' }};
-            </code>
-        </pre>
-        
-           <pre>
-            <code class="java">
-                class Greeter {{ '{' }}
-                    constructor(public greeting: string) {{ '{' }} {{ '}' }}
-
-                    greet() {{ '{' }}
-                        return "hello world";
-                    {{ '}' }}
-                {{ '}' }};
-            </code>
-        </pre>
-      <!-- Date/Time -->
-      <p><span class="glyphicon glyphicon-time"></span> Posted on {{blog.createdDate | date : 'short'}}</p>
-
-      <hr>
-
-      <!-- Preview Image -->
-      <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-
-  
-
-      <hr>
-      <!-- Post Content -->
-      <!--<div [innerHTML]=blog.content></div>-->
-      <hr>
-    </div>
-  </div>
-</div>
-<button (click)="h()" class="btn btn-default">Hhhhhh</button>
-`
+  templateUrl: 'blog_details.component.html',
 
 })
 export class BlogDetailComponent implements OnInit, AfterViewInit, AfterViewChecked,  AfterContentChecked {
   blog: Blog;
   errorMessage: String;
   isLoading: boolean = true;
+  sampleContent: String = "";
 
   constructor(private blogService: BlogService,
               private route: ActivatedRoute,
@@ -77,6 +25,24 @@ export class BlogDetailComponent implements OnInit, AfterViewInit, AfterViewChec
   }
 
   ngOnInit(): void {
+    this.sampleContent = `
+         <pre class="java highlight">
+        
+                class Greeter {
+                    constructor(public greeting: string) { }
+
+                    greet() {
+                        return "hello world";
+                    }
+                };
+    
+        </pre>
+        <pre>
+            <code class="javascript highlight">
+                alert('Hello, World!');
+            </code>
+        </pre>               
+        `;
     this.route.params.subscribe(params => {
       this.blogService
         .get(params['id'])
@@ -114,6 +80,10 @@ export class BlogDetailComponent implements OnInit, AfterViewInit, AfterViewChec
 
   h(): void {
     this.service.highlight(this.el.nativeElement.querySelector('.java'), true);
+  }
+
+  addContent() {
+
   }
 
   ngAfterContentChecked() {

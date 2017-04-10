@@ -18,9 +18,6 @@
                     Content
                   </th>
                   <th>
-                    Category
-                  </th>
-                  <th>
                     Updated Date
                   </th>
                 </tr>
@@ -29,7 +26,6 @@
                 <tr *ngFor="let blog of page?.content">
                   <td class="text-muted">{{blog.title}}</td>
                   <td>{{blog.content}}</td>
-                  <td>{{blog.category.name}}</td>
                   <td>{{blog.lastModifiedDate | date : 'short'}}</td>
                   <td><a target="_blank" [routerLink]="['/admin', blog.id]">Edit</a></td>
 

@@ -5,7 +5,7 @@ export interface Blog {
   content?: string;
   img?: string;
   category?: Category;
-  tags?: Tag[];
+  tags?: Array<Tag>;
   comments?: Array<Comment>;
 }
 

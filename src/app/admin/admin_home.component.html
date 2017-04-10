@@ -17,8 +17,7 @@
                   </div>
                   <div class="form-group">
                     <app-tinymce [(ngModel)]='blog.content' name="blog.content"></app-tinymce>
-                    <pre>&lt;pre class="brush: java;"&gt;&lt;/pre&gt;</pre>
-                    <pre>{{blog.content}}</pre>
+                    <pre>&lt;pre class="java highlight"&gt;&lt;/pre&gt;</pre>
                   </div>
                   <!--<div class="form-group">-->
                   <!--<label>Tags</label>-->
@@ -36,12 +35,12 @@
 
                   <ng-select [multiple]="true"
                              [items]="items"
-                             [active]="seletedTags"
+                             [active]="selectedTags"
                              [disabled]="disabled"
                              (data)="refreshValue($event)"
                              (selected)="selected($event)"
                              (removed)="removed($event)"
-                             placeholder="No city selected" ngDefaultControl></ng-select>
+                             placeholder="No tag selected" ngDefaultControl></ng-select>
 
                   <button (click)="save123()" class="btn btn-default">Save</button>
                 </form>
