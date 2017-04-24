@@ -115,5 +115,14 @@ export class AdminHomeComponent implements OnInit {
         () => console.log('Post Complete1')
       );
   }
+  login() {
+    this.blogService
+      .login()
+      .subscribe(
+        data => console.log(data),
+        err => console.log(err.json().message),
+        () => console.log('Login Complete1')
+      );
+  }
 }
 

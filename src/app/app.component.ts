@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {PeopleService} from './people.service';
-import {BlogService} from "./service/blog.service";
+import {BlogService} from './service/blog.service';
 import {HighlightJsService } from 'angular2-highlight-js';
 
 @Component({

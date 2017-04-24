@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Response, Headers, URLSearchParams, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {Blog, Tag, Category} from '../model/blog';
-import {PaginationPage, PaginationPropertySort} from "../model/pagination";
+import {PaginationPage, PaginationPropertySort} from '../model/pagination';
 
 @Injectable()
 export class BlogService {
@@ -10,6 +10,31 @@ export class BlogService {
 
   constructor(private http: Http) {
   }
+
+  login(): Observable<String> {
+    let people$ = this.http
+      .get(`${this.baseUrl}/user1`, {headers: this.getHeaders()})
+      .map(response => {
+        return response.json().map(r => {
+          return r.name;
+        });
+      })
+      .catch(handleError);
+    return people$;
+  }
+
+//   function mapBlogs(response: Response): PaginationPage<Blog> {
+//   // uncomment to simulate error:
+//   // throw new Error('ups! Force choke!');
+//
+//   // The response of the API has a results
+//   // property with the actual results
+//
+//   let json = response.json();
+//   let result: PaginationPage<Blog> = Object.assign(new PaginationPage<Blog>(), json);
+//
+//   return result;
+// }
 
   getPage(page: number, pageSize: number, sort: PaginationPropertySort): Observable<PaginationPage<Blog>> {
     let params = new URLSearchParams();
