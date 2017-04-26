@@ -29,7 +29,7 @@ export class AdGridComponent implements OnInit, OnDestroy {
       let pageNum: number = 0;
       let pageSize: number = 99999;
       this.blogService
-        .getPage(pageNum, pageSize, null)
+        .getPage(pageNum, pageSize, null, null)
         .subscribe(
           p => this.page = p,
           e => this.errorMessage = e,

@@ -24,13 +24,14 @@ export class BlogListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    let tag: string = 'test';
     this.sub = this.route.queryParams.subscribe(params => {
       let pageNum: number;
       let pageSize: number;
       pageNum = Number.parseInt(params['page']) || 0;
       pageSize = Number.parseInt(params['size']) || 2;
       this.blogService
-        .getPage(pageNum, pageSize, null)
+        .getPage(pageNum, pageSize, tag, null)
         .subscribe(
           p => this.page = p,
           e => this.errorMessage = e,

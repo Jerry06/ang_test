@@ -6,14 +6,27 @@ import {PaginationPage, PaginationPropertySort} from '../model/pagination';
 
 @Injectable()
 export class BlogService {
-  private baseUrl: string = 'http://localhost:8080';
+  private baseUrl: string = 'http://localhost:8080/api';
+  private baseUrl1: string = 'http://localhost:8080';
 
   constructor(private http: Http) {
   }
 
   login(): Observable<String> {
     let people$ = this.http
-      .get(`${this.baseUrl}/user1`, {headers: this.getHeaders()})
+      .get(`${this.baseUrl1}/login/facebook`, {headers: this.getHeaders()})
+      .map(response => {
+        return response.json().map(r => {
+          return "ok";
+        });
+      })
+      .catch(handleError);
+    return people$;
+  }
+
+  login1(): Observable<String> {
+    let people$ = this.http
+      .get(`${this.baseUrl1}/user`, {headers: this.getHeaders()})
       .map(response => {
         return response.json().map(r => {
           return r.name;
@@ -36,7 +49,7 @@ export class BlogService {
 //   return result;
 // }
 
-  getPage(page: number, pageSize: number, sort: PaginationPropertySort): Observable<PaginationPage<Blog>> {
+  getPage(page: number, pageSize: number, tag: string, sort: PaginationPropertySort): Observable<PaginationPage<Blog>> {
     let params = new URLSearchParams();
     params.set('size', `${pageSize}`);
     params.set('page', `${page}`);
@@ -50,11 +63,20 @@ export class BlogService {
     options.headers = this.getHeaders();
     //return this.http.get(`${webServiceEndpoint}/person`, options).map(this.extractData).publish().refCount();
 
-    let people$ = this.http
-      .get(`${this.baseUrl}/blog`, options)
-      .map(mapBlogs)
-      .catch(handleError);
-    return people$;
+    if (tag == null){
+      let people$ = this.http
+        .get(`${this.baseUrl}/blog`, options)
+        .map(mapBlogs)
+        .catch(handleError);
+      return people$;
+    }
+    else {
+      let people$ = this.http
+        .get(`${this.baseUrl}/blog/tag/${tag}`, options)
+        .map(mapBlogs)
+        .catch(handleError);
+      return people$;
+    }
   }
 
   getAll(): Observable<PaginationPage<Blog>> {
@@ -116,7 +138,7 @@ export class BlogService {
   save(Blog: Blog): Observable<Response> {
     let a = 1;
     return this.http
-      .post(`http://localhost:8080/blog/`, JSON.stringify(Blog), {headers: this.getHeaders()});
+      .post(`${this.baseUrl}/blog/`, JSON.stringify(Blog), {headers: this.getHeaders()});
   }
 
   private getHeaders() {
@@ -144,7 +166,7 @@ function mapBlogs(response: Response): PaginationPage<Blog> {
 // to avoid breaking the rest of our app
 // I extract the id from the Blog url
 function extractId(BlogData: any) {
-  let extractedId = BlogData.url.replace('http://localhost:8080/blog/', '').replace('/', '');
+  let extractedId = BlogData.url.replace('http://localhost:8080/api/blog/', '').replace('/', '');
   return parseInt(extractedId);
 }
 

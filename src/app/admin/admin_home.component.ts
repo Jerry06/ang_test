@@ -117,7 +117,7 @@ export class AdminHomeComponent implements OnInit {
   }
   login() {
     this.blogService
-      .login()
+      .login1()
       .subscribe(
         data => console.log(data),
         err => console.log(err.json().message),

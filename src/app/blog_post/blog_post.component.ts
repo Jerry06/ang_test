@@ -4,28 +4,28 @@ import {SelectModule} from 'ng2-select';
 @Component({
   selector: 'about',
   template: `
-<div style="width: 300px; margin-bottom: 20px;">
-  <h3>Select multiple cities</h3>
-  <ng-select  [multiple]="true"
-              [items]="items"
-              [disabled]="disabled"
-              (data)="refreshValue($event)"
-              (selected)="selected($event)"
-              (removed)="removed($event)"
-              placeholder="No city selected"></ng-select>
-  <pre>{{itemsToString(value)}}</pre>
-  <div>
-    <button type="button" class="btn btn-primary"
-            [(ngModel)]="disabledV" btnCheckbox
-            btnCheckboxTrue="1" btnCheckboxFalse="0">
-      {{disabled === '1' ? 'Enable' : 'Disable'}}
-    </button>
-  </div>
-</div>
+    <div style="width: 300px; margin-bottom: 20px;">
+      <h3>Select multiple cities</h3>
+      <ng-select [multiple]="true"
+                 [items]="items"
+                 [disabled]="disabled"
+                 (data)="refreshValue($event)"
+                 (selected)="selected($event)"
+                 (removed)="removed($event)"
+                 placeholder="No city selected"></ng-select>
+      <pre>{{itemsToString(value)}}</pre>
+      <div>
+        <button type="button" class="btn btn-primary"
+                [(ngModel)]="disabledV" btnCheckbox
+                btnCheckboxTrue="1" btnCheckboxFalse="0">
+          {{disabled === '1' ? 'Enable' : 'Disable'}}
+        </button>
+      </div>
+    </div>
 
-	<!--<app-tinymce [(ngModel)]='content'></app-tinymce>-->
-	<!--<pre>{{content}}</pre>-->
-`,
+    <!--<app-tinymce [(ngModel)]='content'></app-tinymce>-->
+    <!--<pre>{{content}}</pre>-->
+  `,
   encapsulation: ViewEncapsulation.None
 })
 
@@ -82,6 +82,20 @@ export class BlogPostComponent {
   }
 
   constructor() {
+
+    let newData: Array<any> = [];
+    let defaultTiming = ["9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00"];
+
+    let timing: any = {
+      time: ""
+    }
+    newData = defaultTiming.map(t => ({time: t}));
+    // for (let x in defaultTiming) {
+    //   timing.time = (typeof defaultTiming[x] != 'undefined') ? defaultTiming[x] : undefined;
+    //   newData.push(timing);
+    // }
+    console.log(newData)
+
   }
 
 }

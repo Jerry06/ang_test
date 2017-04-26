@@ -41,6 +41,11 @@ const routes: Routes = [
   },
   // // map '/persons/:id' to person details component
   {
+    path: 'tag/:name',
+    component: BlogListComponent
+  },
+  // // map '/persons/:id' to person details component
+  {
     path: 'blog/:id',
     component: BlogDetailComponent
   },
