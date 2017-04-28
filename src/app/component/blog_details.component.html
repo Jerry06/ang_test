@@ -3,15 +3,10 @@
   <div class="row">
     <div *ngIf="!blog" class="col-lg-8">Not Found !! Try other blog post !</div>
     <div *ngIf="blog" class="col-lg-8">
-
+      <hr>
       <h1>{{blog.title}}</h1>
       <!-- Date/Time -->
-      <p><span class="glyphicon glyphicon-time"></span> Posted on {{blog.createdDate | date : 'short'}}</p>
-
-      <hr>
-
-      <!-- Preview Image -->
-      <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+      <p><span class="glyphicon glyphicon-time"></span> Updated on {{blog.lastModifiedDate | date : 'short'}}</p>
 
       <hr>
       <!-- Post Content -->
@@ -20,10 +15,19 @@
 
       <!-- Comments Form -->
       <div class="well">
-        <h4>Leave a Comment:</h4>
+
+        <p class="text-right">Login as <b>Viet  </b>
+          <!--<a class="text-right btn">-->
+            <!--<span class="fa fa-facebook"></span> Sign in with Facebook-->
+          <!--</a>-->
+          <a class="text-right btn">
+            <span class="fa fa-facebook"></span> Sign out
+          </a>
+        </p>
+        <h5>Leave a Comment:</h5>
         <form role="form">
           <div class="form-group">
-            <textarea class="form-control" rows="3"></textarea>
+            <textarea class="form-control" rows="5"></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>

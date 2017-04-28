@@ -3,11 +3,11 @@ import {Blog} from '../model/blog';
 import {BlogService} from '../service/blog.service';
 import {PaginationPage} from "../model/pagination";
 import {ActivatedRoute, Router, NavigationEnd} from "@angular/router";
-import {Subscription} from 'rxjs/Rx';
+import {Subscription, Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'blog-list',
-  templateUrl : './blog_list.component.html',
+  templateUrl: './blog_list.component.html',
 })
 
 export class BlogListComponent implements OnInit, OnDestroy {
@@ -24,28 +24,51 @@ export class BlogListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    let tag: string = 'test';
-    this.sub = this.route.queryParams.subscribe(params => {
+    var obsComb = this.route.params.combineLatest(this.route.queryParams,
+      (params, qparams) => ({params, qparams}));
+
+    obsComb.subscribe(ap => {
       let pageNum: number;
       let pageSize: number;
-      pageNum = Number.parseInt(params['page']) || 0;
-      pageSize = Number.parseInt(params['size']) || 2;
+      pageNum = Number.parseInt(ap.qparams['page']) || 0;
+      pageSize = Number.parseInt(ap.qparams['size']) || 4;
       this.blogService
-        .getPage(pageNum, pageSize, tag, null)
+        .getPage(pageNum, pageSize, ap.params['name'], null)
         .subscribe(
           p => this.page = p,
           e => this.errorMessage = e,
           () => this.isLoading = false);
     });
-    this.routerSubscription = this.router.events
-      .filter(event => event instanceof NavigationEnd)
-      .subscribe(event => {
-        document.body.scrollTop = 0;
-      });
+
+    // var obsComb = this.route.params.combineLatest(this.route.queryParams,
+    //   (params, qparams) => {
+    //     let pageNum: number = 0 ;
+    //     let pageSize: number = 2;
+    //     pageNum = Number.parseInt(qparams['page']) || 0;
+    //     pageSize = Number.parseInt(qparams['size']) || 2;
+    //     let tag: string = params['tag'];
+    //     console.info("ap qparams " + qparams);
+    //     console.info("ap params " + params);
+    //     console.info("ap.params is " + params[0]);
+    //     console.info("tag is " + tag);
+    //     this.blogService
+    //       .getPage(pageNum, pageSize, tag, null)
+    //       .subscribe(
+    //         p => this.page = p,
+    //         e => this.errorMessage = e,
+    //         () => this.isLoading = false);
+    //
+    //   });
+
+    // this.routerSubscription = this.router.events
+    //   .filter(event => event instanceof NavigationEnd)
+    //   .subscribe(event => {
+    //     document.body.scrollTop = 0;
+    //   });
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+
   }
 
 }

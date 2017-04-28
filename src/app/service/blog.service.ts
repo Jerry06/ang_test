@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers, URLSearchParams, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
-import {Blog, Tag, Category} from '../model/blog';
+import {Blog, Tag} from '../model/blog';
 import {PaginationPage, PaginationPropertySort} from '../model/pagination';
 
 @Injectable()
@@ -63,16 +63,16 @@ export class BlogService {
     options.headers = this.getHeaders();
     //return this.http.get(`${webServiceEndpoint}/person`, options).map(this.extractData).publish().refCount();
 
-    if (tag == null){
+    if (tag){
       let people$ = this.http
-        .get(`${this.baseUrl}/blog`, options)
+        .get(`${this.baseUrl}/blog/tag/${tag}`, options)
         .map(mapBlogs)
         .catch(handleError);
       return people$;
     }
     else {
       let people$ = this.http
-        .get(`${this.baseUrl}/blog/tag/${tag}`, options)
+        .get(`${this.baseUrl}/blog`, options)
         .map(mapBlogs)
         .catch(handleError);
       return people$;
@@ -108,20 +108,6 @@ export class BlogService {
       .map(response => {
         return response.json().map(r => {
           return r.name;
-        });
-      })
-      .catch(handleError);
-    return result$;
-  }
-
-  getCats(): Observable<Category[]> {
-    let result$ = this.http
-      .get(`${this.baseUrl}/blog/cats`, {headers: this.getHeaders()})
-      .map(response => {
-        return response.json().map(r => {
-          return <Category>({
-            name: r.name,
-          });
         });
       })
       .catch(handleError);

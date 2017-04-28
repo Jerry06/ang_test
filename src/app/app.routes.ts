@@ -14,6 +14,12 @@ const routes: Routes = [
   {
     path: 'blog',
     component: BlogListComponent,
+    // children:[
+    //   {
+    //     path: 'cat/:cat',
+    //     component: BlogListComponent,
+    //   }
+    // ]
   },
   {
     path: 'test',

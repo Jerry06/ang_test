@@ -25,70 +25,27 @@ export class BlogDetailComponent implements OnInit, AfterViewInit, AfterViewChec
   }
 
   ngOnInit(): void {
-    this.sampleContent = `
-         <pre class="java highlight">
-        
-                class Greeter {
-                    constructor(public greeting: string) { }
-
-                    greet() {
-                        return "hello world";
-                    }
-                };
-    
-        </pre>
-        <pre>
-            <code class="javascript highlight">
-                alert('Hello, World!');
-            </code>
-        </pre>               
-        `;
     this.route.params.subscribe(params => {
       this.blogService
         .get(params['id'])
         .subscribe(
-          p => this.test(p),
+          p => this.blog = p,
           e => this.errorMessage = e,
           () => this.isLoading = false);
     });
   }
 
   ngAfterViewInit() {
-    console.log("ngAfterViewInit");
-    // while (this.isLoading){
-    //
-    // }
   }
 
   ngAfterViewChecked() {
-    console.log("ngAfterViewChecked");
+
 
   }
 
-  test(p: Blog): void {
-    this.blog = p;
-    console.log("test");
-    // this.service.highlight(this.el.nativeElement.querySelector('.java'));
-    var millisecondsToWait = 5000;
-    setTimeout(function () {
-      console.log("test timeout");
-
-      // Whatever you want to do after the wait
-    }, millisecondsToWait);
-
-  }
-
-  h(): void {
-    this.service.highlight(this.el.nativeElement.querySelector('.java'), true);
-  }
-
-  addContent() {
-
-  }
 
   ngAfterContentChecked() {
 
 
-    //
   }
 }

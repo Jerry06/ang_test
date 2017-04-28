@@ -16,6 +16,10 @@
                     <input [(ngModel)]='blog.title' name="title" ngDefaultControl class="form-control">
                   </div>
                   <div class="form-group">
+                    <label>Summary</label>
+                    <textarea [(ngModel)]='blog.summary' class="form-control" rows="5" name="summary"></textarea>
+                  </div>
+                  <div class="form-group">
                     <app-tinymce [(ngModel)]='blog.content' name="blog.content"></app-tinymce>
                     <pre>&lt;pre class="java highlight"&gt;&lt;/pre&gt;</pre>
                   </div>
@@ -42,7 +46,7 @@
                              (removed)="removed($event)"
                              placeholder="No tag selected" ngDefaultControl></ng-select>
 
-                  <button (click)="save123()" class="btn btn-default">Save</button>
+                  <button (click)="save()" class="btn btn-default">Save</button>
                   <button (click)="login()" class="btn btn-default">Login</button>
                   <a href="/login/facebook">click here</a>
                 </form>

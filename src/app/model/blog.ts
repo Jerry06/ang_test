@@ -2,15 +2,11 @@ import {UserOAuthInfo} from "./userOAuthInfo";
 export interface Blog {
   id?: string;
   title?: string;
+  summary?: string;
   content?: string;
   img?: string;
-  category?: Category;
   tags?: Array<Tag>;
   comments?: Array<Comment>;
-}
-
-export interface Category {
-  name: string;
 }
 
 export interface Tag {

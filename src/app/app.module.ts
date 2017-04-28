@@ -13,7 +13,7 @@ import {FooterComponent} from './component/footer.component';
 import {MenuComponent} from './component/menu.component';
 import {WidgetsComponent} from './component/blog_widgets.component';
 import {SearchComponent} from './component/blog_search.component';
-import {BlogCategoryComponent} from './component/blog_category.component';
+import {TagCategoryComponent} from './component/tag_category.component';
 import {OtherWidgetComponent} from './component/blog_other_widget.component';
 import {BlogPostComponent} from './blog_post/blog_post.component';
 import {MultipleDemoComponent} from './blog_post/multiple-demo';
@@ -40,7 +40,7 @@ import {RouterModule} from '@angular/router';
     HighlightJsService
   ],
   declarations: [AppComponent, BlogListComponent, FooterComponent, MenuComponent,
-    SearchComponent, BlogCategoryComponent, OtherWidgetComponent,
+    SearchComponent, TagCategoryComponent, OtherWidgetComponent,
     WidgetsComponent, BlogDetailComponent, BlogPostComponent, AdminHomeComponent, AdGridComponent
     , AdMenuComponent, MultipleDemoComponent],
   bootstrap: [AppComponent]

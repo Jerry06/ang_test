@@ -15,7 +15,7 @@
                     Title
                   </th>
                   <th>
-                    Content
+                    Summary
                   </th>
                   <th>
                     Updated Date
@@ -25,7 +25,7 @@
                 <tbody>
                 <tr *ngFor="let blog of page?.content">
                   <td class="text-muted">{{blog.title}}</td>
-                  <td>{{blog.content}}</td>
+                  <td>{{blog.summary}}</td>
                   <td>{{blog.lastModifiedDate | date : 'short'}}</td>
                   <td><a target="_blank" [routerLink]="['/admin', blog.id]">Edit</a></td>
 
