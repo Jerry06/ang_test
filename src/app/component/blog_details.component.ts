@@ -1,6 +1,6 @@
 import {
   Component, OnInit, OnDestroy, AfterViewInit, ElementRef, AfterViewChecked,
-  AfterContentChecked
+  AfterContentChecked, ViewChild
 } from '@angular/core';
 import {Blog} from '../model/blog';
 import {BlogService} from '../service/blog.service';
@@ -13,7 +13,8 @@ import {HighlightJsService} from "angular2-highlight-js";
   templateUrl: 'blog_details.component.html',
 
 })
-export class BlogDetailComponent implements OnInit, AfterViewInit, AfterViewChecked,  AfterContentChecked {
+export class BlogDetailComponent implements OnInit, AfterViewInit, AfterViewChecked, AfterContentChecked {
+  @ViewChild('fbscript') fbScript;
   blog: Blog;
   errorMessage: String;
   isLoading: boolean = true;
@@ -29,23 +30,52 @@ export class BlogDetailComponent implements OnInit, AfterViewInit, AfterViewChec
       this.blogService
         .get(params['id'])
         .subscribe(
-          p => this.blog = p,
+          p => (this.blog = p, this.reloadFB()),
           e => this.errorMessage = e,
           () => this.isLoading = false);
     });
   }
 
-  ngAfterViewInit() {
+  reloadFB() {
+    //   // alert('reload');
+    //   var s = document.createElement("script");
+    //   s.type = "text/javascript";
+    //   s.text = `
+    //   FB = null;
+    // (function (d, s, id) {
+    //   var js, fjs = d.getElementsByTagName(s)[0];
+    //   js = d.createElement(s);
+    //   js.id = id;
+    //   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=379843209043251";
+    //   fjs.parentNode.insertBefore(js, fjs);
+    // }(document, 'script', 'facebook-jssdk'))
+    //   `;
+    //   this.fbScript.nativeElement.appendChild(s);
   }
+
+  ngAfterViewInit() {
+    // alert('reload');
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.text = `
+      FB = null;
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=379843209043251";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'))
+      `;
+    this.fbScript.nativeElement.appendChild(s);
+  }
+
 
   ngAfterViewChecked() {
 
-
   }
 
-
   ngAfterContentChecked() {
-
 
   }
 }

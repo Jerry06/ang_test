@@ -1,6 +1,7 @@
 <menu>Bog loading...</menu>
 <div class="container">
   <div class="row">
+    <div #fbscript></div>
     <div *ngIf="!blog" class="col-lg-8">Not Found !! Try other blog post !</div>
     <div *ngIf="blog" class="col-lg-8">
       <hr>
@@ -12,61 +13,8 @@
       <!-- Post Content -->
       <div [innerHTML]="blog.content" highlight-js-content=".highlight"></div>
       <hr>
-
-      <!-- Comments Form -->
-      <div class="well">
-
-        <p class="text-right">Login as <b>Viet  </b>
-          <!--<a class="text-right btn">-->
-            <!--<span class="fa fa-facebook"></span> Sign in with Facebook-->
-          <!--</a>-->
-          <a class="text-right btn">
-            <span class="fa fa-facebook"></span> Sign out
-          </a>
-        </p>
-        <h5>Leave a Comment:</h5>
-        <form role="form">
-          <div class="form-group">
-            <textarea class="form-control" rows="5"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-
-      <hr>
-
-      <!-- Posted Comments -->
-      <section *ngFor="let comment of blog?.comments">
-        <!-- Comment -->
-        <div class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" src="http://placehold.it/64x64" alt="">
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Start Bootstrap
-              <small>August 25, 2014 at 9:30 PM</small>
-            </h4>
-            {{comment?.content}}
-            <!-- Nested Comment -->
-            <div *ngFor="let reply of comment?.replies" class="media">
-              <a class="pull-left" href="#">
-                <img class="media-object" src="http://placehold.it/64x64" alt="">
-              </a>
-              <div class="media-body">
-                <h4 class="media-heading">Nested Start Bootstrap
-                  <small>August 25, 2014 at 9:30 PM</small>
-                </h4>
-                {{reply?.content}}
-              </div>
-            </div>
-            <!-- End Nested Comment -->
-          </div>
-        </div>
-
-      </section>
-      <!-- Comment -->
-
-
+      <div id="fb-root"></div>
+      <div class="fb-comments"></div>
     </div>
 
     <!-- Blog Sidebar Widgets Column -->
