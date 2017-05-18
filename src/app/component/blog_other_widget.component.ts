@@ -1,21 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-    selector: 'blog_other_widget',
-  template:
-  `
-<!-- Side Widget Well -->
-<div class="well">
-  <h4>Side Widget Well</h4>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus
-    laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-</div>
-
-`
+  selector: 'blog_other_widget',
+  templateUrl: './blog_other_widget.component.html'
 })
 export class OtherWidgetComponent implements OnInit {
-    constructor() { }
+  constructor() {
+  }
 
-    ngOnInit() { }
-
+  ngOnInit() {
+  }
 }
+

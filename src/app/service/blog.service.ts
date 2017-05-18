@@ -63,7 +63,7 @@ export class BlogService {
     options.headers = this.getHeaders();
     //return this.http.get(`${webServiceEndpoint}/person`, options).map(this.extractData).publish().refCount();
 
-    if (tag){
+    if (tag) {
       let people$ = this.http
         .get(`${this.baseUrl}/blog/tag/${tag}`, options)
         .map(mapBlogs)
@@ -119,6 +119,12 @@ export class BlogService {
       .get(`${this.baseUrl}/blog/${id}`, {headers: this.getHeaders()})
       .map(mapBlog);
     return Blog$;
+  }
+
+  delete(id: string): Observable<String> {
+    return this.http
+      .delete(`${this.baseUrl}/blog/${id}`, {headers: this.getHeaders()})
+      .catch(handleError);
   }
 
   save(Blog: Blog): Observable<Response> {

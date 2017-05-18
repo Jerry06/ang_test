@@ -37,24 +37,6 @@ export class BlogDetailComponent implements OnInit, AfterViewInit, AfterViewChec
   }
 
   reloadFB() {
-    //   // alert('reload');
-    //   var s = document.createElement("script");
-    //   s.type = "text/javascript";
-    //   s.text = `
-    //   FB = null;
-    // (function (d, s, id) {
-    //   var js, fjs = d.getElementsByTagName(s)[0];
-    //   js = d.createElement(s);
-    //   js.id = id;
-    //   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=379843209043251";
-    //   fjs.parentNode.insertBefore(js, fjs);
-    // }(document, 'script', 'facebook-jssdk'))
-    //   `;
-    //   this.fbScript.nativeElement.appendChild(s);
-  }
-
-  ngAfterViewInit() {
-    // alert('reload');
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.text = `
@@ -68,6 +50,11 @@ export class BlogDetailComponent implements OnInit, AfterViewInit, AfterViewChec
     }(document, 'script', 'facebook-jssdk'))
       `;
     this.fbScript.nativeElement.appendChild(s);
+  }
+
+  ngAfterViewInit() {
+    // alert('reload');
+
   }
 
 

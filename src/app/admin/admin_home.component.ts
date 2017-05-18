@@ -91,8 +91,8 @@ export class AdminHomeComponent implements OnInit {
     this.blogService
       .save(this.blog)
       .subscribe(
-        data => console.log(data),
-        err => console.log(err.json().message),
+        data => alert('Hehe'),
+        err => alert(err.json().message),
         () => console.log('Post Complete1')
       );
   }

@@ -28,6 +28,8 @@
                   <td>{{blog.summary}}</td>
                   <td>{{blog.lastModifiedDate | date : 'short'}}</td>
                   <td><a target="_blank" [routerLink]="['/admin', blog.id]">Edit</a></td>
+                  <td><a style="cursor: pointer;" (click)="deleteBlog(blog.id)">Delete</a></td>
+
 
                   <!--<a class="btn btn-primary" [routerLink]="['/blog', blog.id]">Read More <span-->
                     <!--class="glyphicon glyphicon-chevron-right"></span></a>-->
