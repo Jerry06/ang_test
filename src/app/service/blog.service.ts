@@ -87,6 +87,15 @@ export class BlogService {
     return people$;
   }
 
+  search(searchText: string): Observable<PaginationPage<Blog>> {
+    let url = `${this.baseUrl}/blog/search?text=${searchText}`;
+    let $result = this.http
+      .get(url, {headers: this.getHeaders()})
+      .map(mapBlogs)
+      .catch(handleError);
+    return $result;
+  }
+
   getTags(): Observable<Tag[]> {
     let result$ = this.http
       .get(`${this.baseUrl}/blog/tags`, {headers: this.getHeaders()})

@@ -8,7 +8,8 @@
       <h1 class="page-header"></h1>
       <!--Page Heading-->
       <!--<small>Secondary Text</small>-->
-      <!--</h1>-->
+
+      <div *ngIf="searching" style="color: red">Found {{page?.totalElements}} results</div>
       <div *ngFor="let blog of page?.content">
         <!-- First Blog Post -->
         <h2>

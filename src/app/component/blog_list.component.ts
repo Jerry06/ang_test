@@ -17,6 +17,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
   page: PaginationPage<Blog>;
   errorMessage: string = '';
   isLoading: boolean = true;
+  searching: boolean = false;
 
   constructor(private blogService: BlogService,
               private route: ActivatedRoute,
@@ -28,17 +29,31 @@ export class BlogListComponent implements OnInit, OnDestroy {
       (params, qparams) => ({params, qparams}));
 
     obsComb.subscribe(ap => {
-      let pageNum: number;
-      let pageSize: number;
-      pageNum = Number.parseInt(ap.qparams['page']) || 0;
-      pageSize = Number.parseInt(ap.qparams['size']) || 4;
-      this.blogService
-        .getPage(pageNum, pageSize, ap.params['name'], null)
-        .subscribe(
-          p => this.page = p,
-          e => this.errorMessage = e,
-          () => this.isLoading = false);
-    });
+        let search: string = ap.qparams['search'];
+        if (search) {
+          this.searching = true;
+          this.blogService
+            .search(search)
+            .subscribe(
+              p => this.page = p,
+              e => this.errorMessage = e,
+              () => this.isLoading = false);
+        }
+        else {
+          this.searching = false;
+          let pageNum: number;
+          let pageSize: number;
+          pageNum = Number.parseInt(ap.qparams['page']) || 0;
+          pageSize = Number.parseInt(ap.qparams['size']) || 4;
+          this.blogService
+            .getPage(pageNum, pageSize, ap.params['name'], null)
+            .subscribe(
+              p => this.page = p,
+              e => this.errorMessage = e,
+              () => this.isLoading = false);
+        }
+      }
+    );
 
     // var obsComb = this.route.params.combineLatest(this.route.queryParams,
     //   (params, qparams) => {
