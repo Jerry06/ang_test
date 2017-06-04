@@ -41,11 +41,11 @@ const routes: Routes = [
   //     }
   //   ]
   // },
-  {
-    path: 'admin/:id',
-    component: AdminHomeComponent,
-  },
   // {
+  //   path: 'admin/:id',
+  //   component: AdminHomeComponent,
+  // },
+  // // {
   //   path: 'grid',
   //   component: AdGridComponent,
   // },

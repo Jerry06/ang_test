@@ -14,7 +14,8 @@ const adminRoutes: Routes = [
         path: '',
         children: [
           {path: 'grid', component: AdGridComponent},
-          {path: 'admin', component: AdminHomeComponent},
+          {path: 'post', component: AdminHomeComponent},
+          {path: 'post/:id', component: AdminHomeComponent},
           {path: '', component: AdminDashboardComponent}
         ]
       }
@@ -32,3 +33,4 @@ const adminRoutes: Routes = [
 })
 export class AdminRoutingModule {
 }
+

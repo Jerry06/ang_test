@@ -21,12 +21,12 @@ import {AdminDashboardComponent} from "./admin-dashboard.component";
     SelectModule,
     ReactiveFormsModule,
     RouterModule,
+    CommonModule,
+    AdminRoutingModule,
     TinymceModule.withConfig({
       plugins: ['lists', 'code', 'codesample'],
       toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | codesample'
     }),
-    CommonModule,
-    AdminRoutingModule,
   ],
   declarations: [
     AdminComponent,

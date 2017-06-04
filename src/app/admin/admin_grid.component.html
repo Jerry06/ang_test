@@ -24,7 +24,7 @@
                 <td class="text-muted">{{blog.title}}</td>
                 <td>{{blog.summary}}</td>
                 <td>{{blog.lastModifiedDate | date : 'short'}}</td>
-                <td><a target="_blank" [routerLink]="['/admin', blog.id]">Edit</a></td>
+                <td><a target="_blank" [routerLink]="['../../admin/post', blog.id]">Edit</a></td>
                 <td><a style="cursor: pointer;" (click)="deleteBlog(blog.id)">Delete</a></td>
 
 
