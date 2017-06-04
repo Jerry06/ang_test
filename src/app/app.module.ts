@@ -5,7 +5,7 @@ import {HttpModule} from '@angular/http';
 
 import {routing} from './app.routes';
 
-import { SelectModule } from 'ng2-select';
+import {SelectModule} from 'ng2-select';
 import {AppComponent}  from './app.component';
 import {BlogListComponent} from './component/blog_list.component';
 import {BlogDetailComponent} from './component/blog_details.component';
@@ -17,32 +17,37 @@ import {TagCategoryComponent} from './component/tag_category.component';
 import {OtherWidgetComponent} from './component/blog_other_widget.component';
 import {BlogPostComponent} from './blog_post/blog_post.component';
 import {MultipleDemoComponent} from './blog_post/multiple-demo';
-import {TinymceModule} from '../angular2-tinymce.module';
-import {AdminHomeComponent} from './admin/admin_home.component';
-import {AdGridComponent} from './admin/admin_grid.component';
-import {AdMenuComponent} from './admin/admin_menu.component';
-import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';
+import {HighlightJsModule, HighlightJsService} from 'angular2-highlight-js';
 import {RouterModule} from '@angular/router';
+import {AdminModule} from "./admin/admin.module";
 
 @NgModule({
-  imports: [BrowserModule, routing, FormsModule, HttpModule, BrowserModule,
+  imports: [
+    BrowserModule,
+    routing,
+    HttpModule,
     FormsModule,
     SelectModule,
     ReactiveFormsModule,
     HighlightJsModule,
     RouterModule,
-    TinymceModule.withConfig({
-      plugins: ['lists', 'code', 'codesample'],
-      toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | codesample'
-    })
+    AdminModule
   ],
   providers: [
     HighlightJsService
   ],
-  declarations: [AppComponent, BlogListComponent, FooterComponent, MenuComponent,
-    SearchComponent, TagCategoryComponent, OtherWidgetComponent,
-    WidgetsComponent, BlogDetailComponent, BlogPostComponent, AdminHomeComponent, AdGridComponent
-    , AdMenuComponent, MultipleDemoComponent],
+  declarations: [
+    AppComponent,
+    BlogListComponent,
+    FooterComponent,
+    MenuComponent,
+    SearchComponent,
+    TagCategoryComponent,
+    OtherWidgetComponent,
+    WidgetsComponent,
+    BlogDetailComponent,
+    BlogPostComponent,
+    MultipleDemoComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

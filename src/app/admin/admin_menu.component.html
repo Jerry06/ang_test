@@ -229,10 +229,15 @@
     <div class="sidebar-nav navbar-collapse">
       <ul class="nav" id="side-menu">
         <li>
-          <a href="/grid"><i class="fa fa-dashboard fa-fw"></i> List</a>
+          <a routerLink="./" routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
         </li>
         <li>
-          <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Post</a>
+          <a routerLink="./grid" routerLinkActive="active"><i class="fa fa-dashboard fa-fw"></i> List</a>
+        </li>
+        <li>
+          <a routerLink="./admin" routerLinkActive="active"><i
+            class="fa fa-dashboard fa-fw"></i> Post</a>
         </li>
       </ul>
     </div>

@@ -91,9 +91,9 @@ export class AdminHomeComponent implements OnInit {
     this.blogService
       .save(this.blog)
       .subscribe(
-        data => alert('Hehe'),
+        data => alert('Ok'),
         err => alert(err.json().message),
-        () => console.log('Post Complete1')
+        () => console.log('save complete')
       );
   }
 
@@ -103,7 +103,7 @@ export class AdminHomeComponent implements OnInit {
       .subscribe(
         data => console.log(data),
         err => console.log(err.json().message),
-        () => console.log('Login Complete1')
+        () => console.log('login complete')
       );
   }
 }

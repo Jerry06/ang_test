@@ -29,18 +29,26 @@ const routes: Routes = [
     path: 'blogpost',
     component: BlogPostComponent,
   },
-  {
-    path: 'admin',
-    component: AdminHomeComponent,
-  },
+  // {
+  //   path: 'admin',
+  //   component: AdminHomeComponent,
+  //   children: [
+  //     {
+  //       path: '',
+  //       children: [
+  //         { path: 'grid', component: AdGridComponent },
+  //       ]
+  //     }
+  //   ]
+  // },
   {
     path: 'admin/:id',
     component: AdminHomeComponent,
   },
-  {
-    path: 'grid',
-    component: AdGridComponent,
-  },
+  // {
+  //   path: 'grid',
+  //   component: AdGridComponent,
+  // },
   {
     path: 'menu',
     component: AdMenuComponent,
